@@ -1,0 +1,1 @@
+<img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/e1209f59-1703-45d3-82ca-42266302587f/orig" alt="Постер фильма 'Я шагаю по Москве'" width = "50%">

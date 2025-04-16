@@ -1,0 +1,1 @@
+<img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/7a580ffc-2d0e-49dd-bdbf-7fa91b72286e/orig" alt="Постер фильма 'Кин-дза-дза'" width = "50%">
