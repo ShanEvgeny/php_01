@@ -1,53 +1,57 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"  rel="stylesheet" />
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-film"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Главная</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/kin-dza-dza">Кин-дза-дза</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/i_shagau_po_moskve">Я шагаю по Москве</a>
-                </li>
-                <!-- <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
-            </ul>
-            </div>
-        </div>
-    </nav>
-    <div class = "container">
-        <?php
-        require_once '../vendor/autoload.php';
-        $loader = new \Twig\Loader\FilesystemLoader('../views');
-        $twig = new \Twig\Environment($loader);
-        
-        $url = $_SERVER["REQUEST_URI"];
-        // echo "Вы на странице: $url, будьте внимательны!<br>";
-        if ($url == "/")
-            echo $twig->render("main.php");
-        else if ($url == "/kin-dza-dza" || $url == "/kin-dza-dza/info" || $url == "/kin-dza-dza/image")
-            echo $twig->render("kin-dza-dza.php");
-        else if ($url == "/i_shagau_po_moskve" || $url == "/i_shagau_po_moskve/info" || $url == "/i_shagau_po_moskve/image")
-            echo $twig->render("i_shagau_po_moskve.php");
-        ?>
-    </div>
-</body>
-</html>
+<?php
+require_once '../vendor/autoload.php';
+$loader = new \Twig\Loader\FilesystemLoader('../views');
+$twig = new \Twig\Environment($loader);
+$url = $_SERVER["REQUEST_URI"];
+
+$title = "";
+$template = "";
+$context = [];
+if ($url == "/"){
+    $template = "main.twig";
+    $title = "Главная";
+    $context['menu_items'] = [
+        [
+            "title" => "Кин-дза-дза",
+            "url_title" => "kin-dza-dza"
+        ],
+        [
+            "title" => "Я шагаю по Москве",
+            "url_title" => "i_shagau_po_moskve"
+        ]
+    ];
+}
+else if ($url == "/kin-dza-dza" || $url == "/kin-dza-dza/info" || $url == "/kin-dza-dza/image"){
+    $template = "object.twig";
+    $title = "Кин-дза-дза";
+    $is_info = $url == "/kin-dza-dza/info";
+    $is_image = $url == "/kin-dza-dza/image";
+    $context['url_title'] = "kin-dza-dza";
+    $context['is_info'] = $is_info;
+    $context['is_image'] = $is_image;
+    if ($is_image){
+        $template = "object_image.twig";
+        $context['image_url'] = "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/7a580ffc-2d0e-49dd-bdbf-7fa91b72286e/orig";
+    }
+    else if ($is_info){
+        $template = "kin-dza-dza_info.twig";
+    }
+}    
+else if ($url == "/i_shagau_po_moskve" || $url == "/i_shagau_po_moskve/info" || $url == "/i_shagau_po_moskve/image"){
+    $template = "object.twig";
+    $title = "Я шагаю по Москве";
+    $is_info = $url == "/i_shagau_po_moskve/info";
+    $is_image = $url == "/i_shagau_po_moskve/image";
+    $context['url_title'] = "i_shagau_po_moskve";
+    $context['is_info'] = $is_info;
+    $context['is_image'] = $is_image;
+    if ($is_image){
+        $template = "object_image.twig";
+        $context['image_url'] = "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/e1209f59-1703-45d3-82ca-42266302587f/orig";
+    }
+    else if ($is_info){
+        $template = "i_shagau_po_moskve_info.twig";
+    }
+}
+$context['title'] = $title;
+echo $twig->render($template, $context);
