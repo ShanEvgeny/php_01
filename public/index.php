@@ -1,5 +1,13 @@
 <?php
 require_once '../vendor/autoload.php';
+require_once '../controllers/MainController.php';
+require_once '../controllers/KinDzaDzaController.php';
+require_once '../controllers/IShagauPoMoskveController.php';
+require_once '../controllers/KinDzaDzaImageController.php';
+require_once '../controllers/IShagauPoMoskveImageController.php';
+require_once '../controllers/KinDzaDzaInfoController.php';
+require_once '../controllers/IShagauPoMoskveInfoController.php';
+require_once "../controllers/Controller404.php";
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader);
 $url = $_SERVER["REQUEST_URI"];
@@ -7,51 +15,38 @@ $url = $_SERVER["REQUEST_URI"];
 $title = "";
 $template = "";
 $context = [];
+$controller = new Controller404($twig);
 if ($url == "/"){
-    $template = "main.twig";
-    $title = "Главная";
-    $context['menu_items'] = [
-        [
-            "title" => "Кин-дза-дза",
-            "url_title" => "kin-dza-dza"
-        ],
-        [
-            "title" => "Я шагаю по Москве",
-            "url_title" => "i_shagau_po_moskve"
-        ]
-    ];
+    $controller = new MainController($twig);
 }
 else if ($url == "/kin-dza-dza" || $url == "/kin-dza-dza/info" || $url == "/kin-dza-dza/image"){
-    $template = "object.twig";
-    $title = "Кин-дза-дза";
     $is_info = $url == "/kin-dza-dza/info";
     $is_image = $url == "/kin-dza-dza/image";
-    $context['url_title'] = "kin-dza-dza";
     $context['is_info'] = $is_info;
     $context['is_image'] = $is_image;
+    $controller = new KinDzaDzaController($twig);
     if ($is_image){
-        $template = "object_image.twig";
-        $context['image_url'] = "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/7a580ffc-2d0e-49dd-bdbf-7fa91b72286e/orig";
+        $controller = new KinDzaDzaImageController($twig);
     }
     else if ($is_info){
-        $template = "kin-dza-dza_info.twig";
+        //$template = "kin-dza-dza_info.twig";
+        $controller = new KinDzaDzaInfoController($twig);
     }
 }    
 else if ($url == "/i_shagau_po_moskve" || $url == "/i_shagau_po_moskve/info" || $url == "/i_shagau_po_moskve/image"){
-    $template = "object.twig";
-    $title = "Я шагаю по Москве";
     $is_info = $url == "/i_shagau_po_moskve/info";
     $is_image = $url == "/i_shagau_po_moskve/image";
-    $context['url_title'] = "i_shagau_po_moskve";
     $context['is_info'] = $is_info;
     $context['is_image'] = $is_image;
+    $controller = new IShagauPoMoskveController($twig);
     if ($is_image){
-        $template = "object_image.twig";
-        $context['image_url'] = "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/e1209f59-1703-45d3-82ca-42266302587f/orig";
+        $controller = new IShagauPoMoskveImageController($twig);
     }
     else if ($is_info){
-        $template = "i_shagau_po_moskve_info.twig";
+        //$template = "i_shagau_po_moskve_info.twig";
+        $controller = new IShagauPoMoskveInfoController($twig);
     }
 }
-$context['title'] = $title;
-echo $twig->render($template, $context);
+if ($controller){
+    $controller->get();
+}
