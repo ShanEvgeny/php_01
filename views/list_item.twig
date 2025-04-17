@@ -1,0 +1,5 @@
+{% from "button.twig" import btn %}
+{{ btn(item.title, "/" ~ item.url_title, true) }}
+{{ btn("Картинка", "/" ~ item.url_title ~ "/image", false) }}
+{{ btn("Описание", "/" ~ item.url_title ~ "/info", false) }}
+

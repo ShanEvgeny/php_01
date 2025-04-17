@@ -5,6 +5,7 @@ class IShagauPoMoskveImageController extends IShagauPoMoskveController{
     public function getContext():array{
         $context = parent::getContext();
         $context['image_url'] = "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/e1209f59-1703-45d3-82ca-42266302587f/orig";
+        $context['is_image'] = true;
         return $context;
     }
 }
