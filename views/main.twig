@@ -1,29 +1,16 @@
 {% from "button.twig" import btn %}
 {% extends "__layout.twig" %}
 {% block content %}
+<style>
+    .card-img-top {
+        height: 450px;
+        object-fit: cover;
+        width: 100%;
+    }
+</style>
 <div class="container row row-cols-4">
     {% for object in cinema_objects %}
-    <div class="flex-grow-1 col p-3">
-        <div class="card">
-            <img src="{{object.image}}" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">{{btn(object.title, "/", true)}}</h5>
-                <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/", false) }}{{ btn("Описание", "/", false) }}</div>
-            </div>
-        </div>
-    </div>
-        
+        {% include 'list_item.twig' %}
     {% endfor %}
 </div>
-{# <pre>
-    {{ dump(cinema_objects) }}
-</pre> #}
-<br>
-<ul class = "list-group">
-{% for item in menu_items %}
-    <li class = "list-group-item">
-        {% include 'list_item.twig' %}
-    </li>
-{% endfor %}
-</ul>
 {% endblock %}

@@ -1,5 +1,14 @@
 {% from "button.twig" import btn %}
-{{ btn(item.title, "/" ~ item.url_title, true) }}
+<div class="flex-grow-1 col p-3">
+    <div class="card">
+        <div><img src="{{object.image}}" class="card-img-top" alt=""></div>
+        <div class="card-body">
+            <h5 class="card-title">{{btn(object.title, "/", true)}}</h5>
+            <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/", false) }}{{ btn("Описание", "/", false) }}</div>
+        </div>
+    </div>
+</div> 
+{# {{ btn(item.title, "/" ~ item.url_title, true) }}
 {{ btn("Картинка", "/" ~ item.url_title ~ "/image", false) }}
-{{ btn("Описание", "/" ~ item.url_title ~ "/info", false) }}
+{{ btn("Описание", "/" ~ item.url_title ~ "/info", false) }} #}
 
