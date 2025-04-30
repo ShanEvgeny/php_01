@@ -5,16 +5,18 @@ class MainController extends TwigBaseController{
     public $title = "Главная";
     public function getContext():array{
         $context = parent::getContext();
-        $context['menu_items'] = [
-            [
-                "title" => "Кин-дза-дза",
-                "url_title" => "kin-dza-dza"
-            ],
-            [
-                "title" => "Я шагаю по Москве",
-                "url_title" => "i_shagau_po_moskve"
-            ]
-        ];
+        // $context['menu_items'] = [
+        //     [
+        //         "title" => "Кин-дза-дза",
+        //         "url_title" => "kin-dza-dza"
+        //     ],
+        //     [
+        //         "title" => "Я шагаю по Москве",
+        //         "url_title" => "i_shagau_po_moskve"
+        //     ]
+        // ];
+        $query = $this->pdo->query("SELECT * FROM cinema_objects");
+        $context['cinema_objects'] = $query->fetchAll();
         return $context;
     }
 }

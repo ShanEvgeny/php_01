@@ -1,5 +1,61 @@
+{% from "button.twig" import btn %}
 {% extends "__layout.twig" %}
 {% block content %}
+<style>
+    /* div {
+        display: inline-block;
+    } */
+    /* .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    } */
+</style>
+<div class = "container gap-3">
+    {% for object in cinema_objects %}
+        <div class = "item flex-grow-1">
+            <div class = "d-flex justify-content-evenly"><img class="w-100" src= {{object.image}} alt=""></div>
+            <div class="w-100" style = "text-align: center;">{{ btn(object.title, "/", true) }}</div>
+            <div class="d-flex justify-content-evenly">
+                {{ btn("Картинка", "/", false) }}
+                {{ btn("Описание", "/", false) }}
+            </div>
+            {# <div>
+                <img src= {{object.image}} alt="">
+            </div>
+            <table>
+                <tr>
+                    <td colspan = "2">{{ btn(object.title, "/", true) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ btn("Картинка", "/", false) }}</td>
+                    <td>{{ btn("Описание", "/", false) }}</td>
+                </tr>
+            </table> #}
+        </div>
+    {% endfor %}
+</div>
+<div class="container flex-wrap">
+    {% for object in cinema_objects %}
+
+        <div class="card">
+            <img src="{{object.image}}" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title">{{btn(object.title, "/", true)}}</h5>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+{# <pre>
+    {{ dump(cinema_objects) }}
+</pre> #}
 <br>
 <ul class = "list-group">
 {% for item in menu_items %}
