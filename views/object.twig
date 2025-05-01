@@ -1,14 +1,14 @@
 {% from "button.twig" import btn %}
 {% extends "__layout.twig" %}
 {% block content %}
-<p>Здесь информация о фильме "{{title}}"</p>
+{# <p>Здесь информация о фильме "{{title}}"</p> #}
 <p>{{description}}</p>
 <ul class="nav nav-pills">
   <li class="nav-item">
-    {{btn("Картинка", "/" ~ url_title ~ "/image", is_image ? true)}}
+    {{btn("Картинка", "/cinema-objects/" ~ id ~ "/image", is_image ? true)}}
   </li>
   <li>
-    {{btn("Описание", "/" ~ url_title ~ "/info", is_info ? true)}}
+    {{btn("Описание", "/cinema-objects/" ~ id ~ "/info", is_info ? true)}}
   </li>
 </ul>
 <br>

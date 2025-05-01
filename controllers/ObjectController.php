@@ -8,6 +8,7 @@ class ObjectController extends TwigBaseController{
         $query->bindValue("my_id", $this->params['id']);
         $query->execute();
         $data = $query->fetch();
+        $context["id"] = $data["id"];
         $context["description"] = $data["description"];
         return $context;
     }
