@@ -2,6 +2,7 @@
 {% extends "__layout.twig" %}
 {% block content %}
 <p>Здесь информация о фильме "{{title}}"</p>
+<p>{{description}}</p>
 <ul class="nav nav-pills">
   <li class="nav-item">
     {{btn("Картинка", "/" ~ url_title ~ "/image", is_image ? true)}}

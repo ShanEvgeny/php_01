@@ -3,8 +3,8 @@
     <div class="card">
         <div><img src="{{object.image}}" class="card-img-top" alt=""></div>
         <div class="card-body">
-            <h5 class="card-title">{{btn(object.title, "/", true)}}</h5>
-            <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/", false) }}{{ btn("Описание", "/", false) }}</div>
+            <h5 class="card-title">{{btn(object.title, "/cinema-objects/" ~ object.id, true)}}</h5>
+            <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/cinema-objects/" ~ object.id ~ "/image", false) }}{{ btn("Описание", "/cinema-objects/" ~ object.id ~ "/info", false) }}</div>
         </div>
     </div>
 </div> 
