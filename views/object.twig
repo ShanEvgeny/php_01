@@ -5,15 +5,21 @@
 <p>{{description}}</p>
 <ul class="nav nav-pills">
   <li class="nav-item">
-    {{btn("Картинка", "/cinema-objects/" ~ id ~ "/image", is_image ? true)}}
+    {{btn("Картинка", "/cinema-objects/" ~ id ~ "?show=image", is_image ? true)}}
   </li>
   <li>
-    {{btn("Описание", "/cinema-objects/" ~ id ~ "/info", is_info ? true)}}
+    {{btn("Описание", "/cinema-objects/" ~ id ~ "?show=info", is_info ? true)}}
   </li>
 </ul>
 <br>
 <div class = "container">
+  {% if is_image %}
+    <img src="{{image}}" alt="" width = "25%">
+  {% elseif is_info %}
+    {{info}}
+  {% endif %}
+    {# <img src="{{image}}" alt="" width = "25%">
     {% block objectContext %}
-    {% endblock %}
+    {% endblock %} #}
 </div>
 {% endblock %}
