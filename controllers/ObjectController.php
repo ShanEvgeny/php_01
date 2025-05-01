@@ -1,5 +1,6 @@
 <?php
-class ObjectController extends TwigBaseController{
+require_once "BaseCinemaTwigController.php";
+class ObjectController extends BaseCinemaTwigController{
     public $template = "object.twig";
     public function getContext():array{
         $context = parent::getContext();

@@ -1,11 +1,18 @@
 <?php
-//require_once "TwigBaseController.php";
-class MainController extends TwigBaseController{
+require_once "BaseCinemaTwigController.php";
+class MainController extends BaseCinemaTwigController{
     public $template = "main.twig";
     public $title = "Главная";
     public function getContext():array{
         $context = parent::getContext();
-        $query = $this->pdo->query("SELECT * FROM cinema_objects");
+        if (isset($_GET['type'])){
+            $query = $this->pdo->prepare("SELECT * FROM cinema_objects WHERE type = :type");
+            $query->bindValue("type", $_GET['type']);
+            $query->execute();
+        }
+        else {
+            $query = $this->pdo->query("SELECT * FROM cinema_objects");
+        }
         $context['cinema_objects'] = $query->fetchAll();
         return $context;
     }

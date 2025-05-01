@@ -20,12 +20,17 @@
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Главная</a>
                 </li>
-                <li class="nav-item">
+                {% for type in types %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/?type={{type.type}}">{{type.type|title}}</a>
+                    </li>
+                {% endfor %}
+                {# <li class="nav-item">
                 <a class="nav-link" href="/kin-dza-dza">Кин-дза-дза</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/i_shagau_po_moskve">Я шагаю по Москве</a>
-                </li>
+                </li> #}
                 <!-- <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->

@@ -5,12 +5,6 @@ require_once '../controllers/MainController.php';
 require_once "../controllers/ObjectController.php";
 require_once "../controllers/ObjectInfoController.php";
 require_once "../controllers/ObjectImageController.php";
-require_once '../controllers/KinDzaDzaController.php';
-require_once '../controllers/IShagauPoMoskveController.php';
-require_once '../controllers/KinDzaDzaImageController.php';
-require_once '../controllers/IShagauPoMoskveImageController.php';
-require_once '../controllers/KinDzaDzaInfoController.php';
-require_once '../controllers/IShagauPoMoskveInfoController.php';
 require_once "../controllers/Controller404.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
@@ -34,12 +28,3 @@ $router->add("/cinema-objects/(?P<id>\d+)", ObjectController::class);
 $router->add("/cinema-objects/(?P<id>\d+)/info", ObjectInfoController::class);
 $router->add("/cinema-objects/(?P<id>\d+)/image", ObjectImageController::class);
 $router->get_or_default(Controller404::class);
-
-// if ($url == "/"){
-//     $controller = new MainController($twig);
-// }
-
-// if ($controller){
-//     $controller->setPDO($pdo);
-//     $controller->get();
-// }
