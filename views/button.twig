@@ -1,6 +1,6 @@
 {% macro btn(text, url, value, type) %}
 {% if value == false %}
-    <a class="w-100 btn btn-link" href="{{url}}">
+    <a class="btn btn-link" href="{{url}}">
         {{text}}
     </a>  
 {% elseif value == true and type == null %}

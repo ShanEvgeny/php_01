@@ -4,7 +4,7 @@
         <div><img src="{{object.image}}" class="card-img-top" alt=""></div>
         <div class="card-body">
             <h5 class="card-title">{{btn(object.title, "/cinema-objects/" ~ object.id, true)}}</h5>
-            <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/cinema-objects/" ~ object.id ~ "/image", false) }}{{ btn("Описание", "/cinema-objects/" ~ object.id ~ "/info", false) }}</div>
+            <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/cinema-objects/" ~ object.id ~ "?show=image", false) }}{{ btn("Описание", "/cinema-objects/" ~ object.id ~ "?show=info", false) }}</div>
         </div>
     </div>
 </div> 

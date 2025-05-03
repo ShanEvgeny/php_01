@@ -1,0 +1,36 @@
+{% from "button.twig" import btn %}
+{% extends "__layout.twig" %}
+{% block content %}
+    <h1>Поиск</h1>
+    <form class="row g-3">
+        <div class = "col-md-3">
+            <label class = "form-label">Тип</label>
+            <select  name = "type" class = "form-select">
+                <option value="">Все</option>
+                <option value="фильм">Фильм</option>
+                <option value="сериал">Сериал</option>
+            </select>
+        </div>
+        <div class = "col-md-4">
+            <label class = "form-label">Название</label>
+            <input name = "title" type="text" class = "form-control">
+        </div>
+        <div class = "col-md-4">
+            <label class = "form-label">Описание</label>
+            <input  name = "info" type="text" class = "form-control">
+        </div>
+        <div class = "col-md-1">
+            <label class = "form-label"></label>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+    </form>
+    <br>
+    <ul class = "list-group">
+        {% for object in objects %}
+            <li class = "list-group-item">
+                {{ btn(object.title, "/cinema-objects/" ~ object.id, false) }}
+            </li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}
