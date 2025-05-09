@@ -1,14 +1,18 @@
 {% from "button.twig" import btn %}
 <div class="flex-grow-1 col p-3">
-    <div class="card">
+    <div class="card position-relative">
+        <div class = "position-absolute" style = "right: 4px; top: 4px">
+            <form action = "/cinema-objects/{{object.id}}/delete" method = "POST">
+                {# <input type = "hidden" name = "id" value = "{{object.id}}"> #}
+                <button type = "submit" class = "btn btn-danger">
+                    <i class = "fas fa-times"></i>
+                </button>
+            </form>
+        </div>
         <div><img src="{{object.image}}" class="card-img-top" alt=""></div>
         <div class="card-body">
             <h5 class="card-title">{{btn(object.title, "/cinema-objects/" ~ object.id, true)}}</h5>
             <div class="d-flex justify-content-evenly">{{ btn("Картинка", "/cinema-objects/" ~ object.id ~ "?show=image", false) }}{{ btn("Описание", "/cinema-objects/" ~ object.id ~ "?show=info", false) }}</div>
         </div>
     </div>
-</div> 
-{# {{ btn(item.title, "/" ~ item.url_title, true) }}
-{{ btn("Картинка", "/" ~ item.url_title ~ "/image", false) }}
-{{ btn("Описание", "/" ~ item.url_title ~ "/info", false) }} #}
-
+</div>
