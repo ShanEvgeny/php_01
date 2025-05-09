@@ -3,7 +3,7 @@ require_once "BaseCinemaTwigController.php";
 class CinemaObjectCreateController extends BaseCinemaTwigController{
     public $template = "cinema_object_create.twig";
     public function get(array $context){
-        echo $_SERVER["REQUEST_METHOD"];
+        // echo $_SERVER["REQUEST_METHOD"];
         parent::get($context);
     }
     public function post(array $context){
