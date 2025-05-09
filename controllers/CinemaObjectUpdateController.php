@@ -1,9 +1,18 @@
 <?php
 require_once "BaseCinemaTwigController.php";
-class CinemaObjectCreateController extends BaseCinemaTwigController{
+class CinemaObjectUpdateController extends BaseCinemaTwigController{
     public $template = "cinema_object_create.twig";
     public function get(array $context){
-        $context["is_create"] = true;
+        $id = $this->params['id'];
+        $sql = <<<EOL
+SELECT * FROM cinema_objects WHERE id = :id
+EOL;
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('id', $id);
+        $query->execute();
+        $data = $query->fetch();
+        $context['object'] = $data;
+        $context["is_update"] = true;
         parent::get($context);
     }
     public function post(array $context){
@@ -16,8 +25,8 @@ class CinemaObjectCreateController extends BaseCinemaTwigController{
         move_uploaded_file($tmp_name,"../public/media/$name");
         $image_url = "/media/$name";
         $sql = <<<EOL
-INSERT INTO cinema_objects(title, description, type_id, info, image)
-VALUES(:title, :description, :type, :info, :image_url)
+UPDATE cinema_objects SET title = :title, description = :description, type_id = :type, info = :info, image = :image_url
+WHERE id = :id
 EOL;
         $query = $this->pdo->prepare($sql);
         $query->bindValue("title", $title);
@@ -25,9 +34,10 @@ EOL;
         $query->bindValue("type", $type_id);
         $query->bindValue("info", $info);
         $query->bindValue("image_url", $image_url);
+        $query->bindValue("id", $this->params['id']);
         $query->execute();
-        $context["message"] = "Вы успешно создали объект";
-        $context["id"] = $this->pdo->lastInsertId();
+        $context["message"] = "Вы успешно изменили объект";
+        $context["id"] = $this->params['id'];
         $this->get($context);
     }
 }
