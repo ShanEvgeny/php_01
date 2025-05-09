@@ -2,9 +2,11 @@
 class BaseCinemaTwigController extends TwigBaseController{
     public function getContext():array{
         $context = parent::getContext();
-        $query = $this->pdo->query("SELECT DISTINCT type FROM cinema_objects ORDER BY 1");
+        $query = $this->pdo->query(
+            "SELECT type_name, id FROM object_types ORDER BY id");
         $types = $query->fetchAll();
         $context['types'] = $types;
+
         return $context;
     }
 }

@@ -35,6 +35,6 @@ class Router{
         if ($controllerInstance instanceof TwigBaseController){
             $controllerInstance->setTwig($this->twig);
         }
-        return $controllerInstance->get();
+        return $controllerInstance->process_response();
     }
 }
