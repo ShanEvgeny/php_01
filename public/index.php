@@ -1,6 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
 require_once "../framework/autoload.php";
+require_once '../middlewares/LoginRequiredMiddleware.php';
 require_once '../controllers/MainController.php';
 require_once "../controllers/ObjectController.php";
 require_once "../controllers/SearchController.php";
@@ -25,9 +26,9 @@ $pdo = new PDO("mysql:host=localhost;dbname=movies;charset=utf8", "root", "");
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/cinema-objects/(?P<id>\d+)", ObjectController::class);
-$router->add("/cinema-objects/create", CinemaObjectCreateController::class);
-$router->add("/object-types/create", CinemaTypetCreateController::class);
-$router->add("/cinema-objects/(?P<id>\d+)/delete", CinemaObjectDeleteController::class);
-$router->add("/cinema-objects/(?P<id>\d+)/edit", CinemaObjectUpdateController::class);
+$router->add("/cinema-objects/create", CinemaObjectCreateController::class)->middleware(new LoginRequiredMiddleware());
+$router->add("/object-types/create", CinemaTypetCreateController::class)->middleware(new LoginRequiredMiddleware());
+$router->add("/cinema-objects/(?P<id>\d+)/delete", CinemaObjectDeleteController::class)->middleware(new LoginRequiredMiddleware());
+$router->add("/cinema-objects/(?P<id>\d+)/edit", CinemaObjectUpdateController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/search", SearchController::class);
 $router->get_or_default(Controller404::class);

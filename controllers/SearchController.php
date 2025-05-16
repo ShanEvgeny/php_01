@@ -11,7 +11,7 @@ class SearchController extends BaseCinemaTwigController{
 SELECT co.id, title, info 
 FROM cinema_objects AS co
 JOIN object_types AS ot ON ot.id = co.type_id
-WHERE (title like CONCAT('%', :title, '%')) AND (info like CONCAT('%', :info, '%')) AND (type_name = :type)
+WHERE (title like CONCAT('%', :title, '%')) AND (info like CONCAT('%', :info, '%')) AND ((type_name = :type) OR ('все' = :type))
 EOL;
         $query = $this->pdo->prepare($sql);
         $query->bindValue('title', $title);
