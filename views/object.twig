@@ -1,7 +1,14 @@
 {% from "button.twig" import btn %}
 {% extends "__layout.twig" %}
 {% block content %}
-{# <p>Здесь информация о фильме "{{title}}"</p> #}
+<br>
+Сообщение из сессии: {{my_session_message}}
+<br>
+Последние сообщения:<br>
+{% for message in messages %}
+  {{message}}<br>
+{% endfor %}
+<hr>
 <p>{{description}}</p>
 <ul class="nav nav-pills">
   <li class="nav-item">
@@ -18,8 +25,5 @@
   {% elseif is_info %}
     {{info}}
   {% endif %}
-    {# <img src="{{image}}" alt="" width = "25%">
-    {% block objectContext %}
-    {% endblock %} #}
 </div>
 {% endblock %}

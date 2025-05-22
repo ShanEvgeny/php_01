@@ -27,6 +27,8 @@ class ObjectController extends BaseCinemaTwigController{
             $context['is_image'] = true;
             $context["image"] = $data["image"];
         }
+        $context['my_session_message'] = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : "";
+        $context["messages"] = isset($_SESSION['messages']) ? $_SESSION['messages'] : "";
         return $context;
     }
 }

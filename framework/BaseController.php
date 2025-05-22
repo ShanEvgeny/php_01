@@ -12,6 +12,7 @@ abstract class BaseController{
         return [];
     }
     public function process_response(){
+        session_start();
         $method = $_SERVER["REQUEST_METHOD"];
         $context = $this->getContext();
         if ($method == "GET"){

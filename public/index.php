@@ -11,6 +11,7 @@ require_once "../controllers/CinemaObjectCreateController.php";
 require_once "../controllers/CinemaTypeCreateController.php";
 require_once "../controllers/CinemaObjectDeleteController.php";
 require_once "../controllers/CinemaObjectUpdateController.php";
+require_once "../controllers/SetWelcomeController.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -32,4 +33,5 @@ $router->add("/object-types/create", CinemaTypetCreateController::class)->middle
 $router->add("/cinema-objects/(?P<id>\d+)/delete", CinemaObjectDeleteController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/cinema-objects/(?P<id>\d+)/edit", CinemaObjectUpdateController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/search", SearchController::class);
+$router->add("/set-welcome/", SetWelcomeController::class);
 $router->get_or_default(Controller404::class);

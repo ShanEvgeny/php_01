@@ -36,13 +36,30 @@
                     <a class="nav-link active" aria-current="page" href="/object-types/create">Тип</a>
                 </li>
             </ul>
+            <form action="/set-welcome/">
+                <input type="text" name = "message" class = "form-control mr-2 ml-2">
+            </form>
             </div>
         </div>
     </nav>
     <div class = "container">
-        {% block content %}
-
-        {% endblock %}
+        <div class = "row">
+            <div class = "col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class = "col-md-4">
+                <br>
+                <p>Последние страницы, которые вы посетили:</p>
+                {% for page in page_list %}
+                    <div class = "card position-relative" style = "background-color: rgb(231, 201, 232); padding: 8px; margin: 8px">
+                        <a style = "color:black" href="{{page}}">{{page}}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {# {% block content %}
+        {% endblock %} #}
     </div>
 </body>
 </html>
