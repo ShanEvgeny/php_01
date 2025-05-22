@@ -1,4 +1,5 @@
 <?php
+//Ссылка на выложенный на хостинг сайт(задание 6.2): f4cffb08589c.hosting.myjino.ru
 require_once '../vendor/autoload.php';
 require_once "../framework/autoload.php";
 require_once '../middlewares/LoginRequiredMiddleware.php';
