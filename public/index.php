@@ -12,9 +12,9 @@ require_once "../controllers/CinemaTypeCreateController.php";
 require_once "../controllers/CinemaObjectDeleteController.php";
 require_once "../controllers/CinemaObjectUpdateController.php";
 require_once "../controllers/SetWelcomeController.php";
-require_once '../middlewares/LoginRequiredMiddleware.php';
 require_once "../controllers/LoginController.php";
-
+require_once '../middlewares/LoginRequiredMiddleware.php';
+require_once "../controllers/ExitController.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -27,8 +27,10 @@ $template = "";
 $context = [];
 
 $pdo = new PDO("mysql:host=localhost;dbname=movies;charset=utf8", "root", "");
-
+session_set_cookie_params(60*60*10);
+session_start();
 $router = new Router($twig, $pdo);
+
 
 $router->add("/", MainController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/cinema-objects/(?P<id>\d+)", ObjectController::class)->middleware(new LoginRequiredMiddleware());
@@ -39,8 +41,5 @@ $router->add("/cinema-objects/(?P<id>\d+)/edit", CinemaObjectUpdateController::c
 $router->add("/search", SearchController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/set-welcome", SetWelcomeController::class)->middleware(new LoginRequiredMiddleware());
 $router->add("/login", LoginController::class);
+$router->add("/logout", ExitController::class);
 $router->get_or_default(Controller404::class);
-
-print_r($_SESSION['is_logged']);
-print_r($_SESSION['middletvar']);
-

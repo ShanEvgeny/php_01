@@ -1,6 +1,6 @@
 <?php
 //require_once "BaseCinemaTwigController.php";
-class LoginController extends BaseCinemaTwigController{
+class LoginController extends TwigBaseController{
     public $template = "login.twig";
     public $title = "Авторизация";
     public function get(array $context){
@@ -13,13 +13,11 @@ class LoginController extends BaseCinemaTwigController{
         $query->bindValue("username", $username);
         $query->bindValue("password", $password);
         $query->execute();
-        $_SESSION["is_logged"] = true;
-        $_SESSION["middletvar"] = true;
-        if($query->rowCount() == 0) {
-            $_SESSION["is_logged"] = false;
-            $_SESSION["middletvar"] = true;
+        if($query->rowCount() > 0) {
+            $_SESSION["is_logged"] = true;
+            header("Location: /");
+            exit;
         }
-        //$context['is_logged'] = isset($_SESSION["is_logged"]) ? $_SESSION["is_logged"] : false;
         $this->get($context);
     }
 
